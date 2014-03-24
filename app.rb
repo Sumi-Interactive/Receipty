@@ -5,10 +5,12 @@ require 'typhoeus'
 
 post '/' do
   request.body.rewind  # in case someone already read it
+  receipt = request.body.read
+  p receipt
   external_request = Typhoeus::Request.new(
     "https://sandbox.itunes.apple.com/verifyReceipt",
     method: :post,
-    params: { "receipt-data" => request.body.read }
+    body: receipt
   )
   external_request.run.body
 end
