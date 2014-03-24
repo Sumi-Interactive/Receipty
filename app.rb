@@ -6,7 +6,7 @@ require 'typhoeus'
 post '/' do
   request.body.rewind  # in case someone already read it
   request = Typhoeus::Request.new(
-    "https://buy.itunes.apple.com/verifyReceipt",
+    "https://sandbox.itunes.apple.com/verifyReceipt",
     method: :post,
     params: { "receipt-data" => request.body.read }
   )
