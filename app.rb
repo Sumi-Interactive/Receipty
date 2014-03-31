@@ -6,7 +6,6 @@ require 'typhoeus'
 post '/' do
   request.body.rewind  # in case someone already read it
   receipt = request.body.read
-  p receipt
   external_request = Typhoeus::Request.new(
     "https://sandbox.itunes.apple.com/verifyReceipt",
     method: :post,
