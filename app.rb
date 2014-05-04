@@ -4,7 +4,10 @@ require 'sinatra'
 require 'typhoeus'
 
 post '/' do
-  api_url = "https://buy.itunes.apple.com/verifyReceipt"
+  app_env = request.env['HTTP_X_SANDBOX'] ? 'sandbox' : 'buy'
+
+  api_url = "https://#{app_env}.itunes.apple.com/verifyReceipt"
+
   request.body.rewind  # in case someone already read it
   receipt = request.body.read
   external_request = Typhoeus::Request.new(
